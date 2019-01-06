@@ -16,7 +16,7 @@ bot.servConf = new db.table("serverConfig")
 require("./uptime.js")
 
 bot.on("ready", () => {
-    console.log("Ntapp");
+    console.log("Bot Online");
   
      setInterval(() => {
         dbl.postStats(bot.guilds.size, bot.shards.id, bot.shards.total);
