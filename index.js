@@ -9,7 +9,6 @@ const db = require("quick.db")
 const bot = new ZalveeyClient({
   disableEveryone: true,
 })
-const PREFIX = "z;"
 bot.commands = new Discord.Collection()
 bot.aliases = new Discord.Collection()
 bot.servConf = new db.table("serverConfig")
