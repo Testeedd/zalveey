@@ -6,29 +6,24 @@ const {loadImage} = require("canvas")
 exports.run = async (bot, message, args) => {
   let code = args.slice(1).join(" ")
   if (!code) return
-  
   owners_id.forEach(async function(owner) {
     if (message.author.id !== owner) return;
-  const embed = new Discord.RichEmbed()
-  let image = await loadImage(message.author.displayAvatarURL)
+    const embed = new Discord.RichEmbed()
+    let image = await loadImage(message.author.displayAvatarURL)
     //.addField('Input', '```js\n' + code + '```')
   
-  owners_id.forEach(async function(owner) {
-    if (message.author.id !== owner) return;
     try {
-    let evaled = await eval(code)
-    const attachment = new Discord.Attachment(evaled.toBuffer(), 'canvas.png')
-    //embed.setTitle("Output")
-    embed.attachFile(attachment)
-    embed.setImage("attachment://canvas.png")
-    message.channel.send(embed)
+      let evaledCanvas = await eval(code)
+      const attachment = new Discord.Attachment(evaledCanvas.toBuffer(), 'canvas.png')
+      //embed.setTitle("Output")
+      embed.attachFile(attachment)
+      embed.setImage("attachment://canvas.png")
+      message.channel.send(embed)
     } catch (e) {
       embed.addField("Error", "```js\n"+e.message+"```")
       message.channel.send(embed)
     }
   })
-  })
-  
 }
 
 exports.config = {
